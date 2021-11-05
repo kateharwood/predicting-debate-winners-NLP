@@ -1,0 +1,72 @@
+Kate Harwood
+krh2154@columbia.edu
+Homework1
+
+##########################################################
+# EXPLANATION OF FEATURES AND FEATURE EXTRACTION FUNCTIONS
+# AND 
+#########################################################
+# There are 5 main functions used for feature extraction in features.py:
+#
+# 1. get_debate_labels
+#   Input: All debates from the given data
+#   Output: A list of the winner labels for all the debates
+#
+# 2. get_ngram_features
+#   Input: 
+#       1. A list of training debates
+#       2. A list of testing debates
+#   Output: 2 feature objects
+#       Vectorized ngram features for training and testing data
+#	    Where ngrams are the top 200 1,2,3ngrams and their values are their Tdidf score
+#
+# 3. get_ngram_lex_features
+#   Input: 
+#       1. A list of training debates
+#       2. A list of testing debates
+#       3. The NRC-VAD-Lexicon file
+#   Output: 2 feature objects
+#       The vectorized ngrams+lex features for training and testing data
+#	    Where lex is the frequency of high arousal words in the pro and con sides
+#
+# 4. get_ngram_lex_ling_features
+#   Input: 
+#       1. A list of training debates
+#       2. A list of testing debates
+#       3. The NRC-VAD-Lexicon file
+#   Output: 4 feature objects
+#       The vectorized ngrams+lex+ling1 features for training and testing data
+#       And the vectorized ngrams+lex+ling2 features for training and testing data
+#           Where ling1 is length
+#           And ling2 is personal pronouns
+#
+# 5. get_ngram_lex_ling_user_features
+#   Input: 
+#       1. A list of training debates
+#       2. A list of testing debates
+#       3. The user data in pd df
+#       3. The NRC-VAD-Lexicon file
+#   Output: 8 feature objects
+#       The vectorized ngrams+lex+ling1+user features for training and testing data
+#       The vectorized ngrams+lex+ling1+ling2+user1 features for training and testing data
+#       The vectorized ngrams+lex+ling1+user+user2 features for training and testing data
+#       The vectorized ngrams+lex+ling1+ling2+user1+user2 features for training and testing data
+#           Where user1 is big issues similarity between voters and debaters
+#           And user2 is religious similarity between voters and debaters
+
+
+##################################
+# SPECIAL FEATURES AND LIMITATIONS
+##################################
+Limitations:
+
+There are multiple types of Christianity in the religions (“Christian - <type of christianity>”), and my feature extraction method only looks for exact matches for user similarity. It might yield better results to strip the types and just match on “Christian”.
+
+In addition, the way I derived similarity between user beliefs is somewhat crude, and other methods (such as the cosine similarity in the linked paper) might provide more salient results.
+
+In the ngrams features, I might get better accuracy if I split the features between pro and con sides, rather than ngrams in the debate as a whole.
+
+If I had more time, I would love to explore all of these improvements.
+
+Downloads:
+In features.py I download a POS tagger with nltk.download('averaged_perceptron_tagger')
